@@ -1,0 +1,942 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/2/2019 11:40:34 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FIDELI-040"
+  DTS:CreatorName="CELMEDIA\dcotal"
+  DTS:DTSID="{4B53F420-C557-4F45-B765-2609E2A40BFD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.0900.40"
+  DTS:LocaleID="13322"
+  DTS:ObjectName="Lesson 1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{3500F789-A6FF-4F30-8FC0-EA354436A603}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW2012]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F48A14B4-2E4E-4E6C-879A-ED8FA293625D}"
+      DTS:ObjectName="(localdb)\Servidor.AdventureWorksDW2012">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(localdb)\Servidor;Initial Catalog=AdventureWorksDW2012;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW20121]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{959CD901-F9AD-4BAE-AC0D-AE39B672A8DF}"
+      DTS:ObjectName="(localdb)\Servidor.AdventureWorksDW20121">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(localdb)\Servidor;Initial Catalog=AdventureWorksDW2012;Integrated Security=True;Application Name=SSIS-Lesson 1-{959CD901-F9AD-4BAE-AC0D-AE39B672A8DF}(localdb)\Servidor.AdventureWorksDW20121;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sample Flat File Source Data]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Ejemplo origen de datos desde archivo plano"
+      DTS:DTSID="{5381B2BE-62F2-4DE5-BE32-07248E51BE2A}"
+      DTS:ObjectName="Sample Flat File Source Data">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Dcotal\Estudiando\Manual Integration Service\Creating a Simple ETL Package\Sample Data\SampleCurrencyData.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AverageRate"
+              DTS:DTSID="{5AE44CAC-F766-4DC5-A202-F5514A1E4936}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CurrencyID"
+              DTS:DTSID="{C572910B-5819-45A5-9504-7B96BE77EFCB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CurrencyDate"
+              DTS:DTSID="{707951BA-7BF3-4ADF-BD87-E58DE04DB56D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EndOfDayRate"
+              DTS:DTSID="{08143EB9-DDCC-4125-9DAF-0E5149398236}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Carga de Datos Desde Archiv Plano"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{E02658E4-867E-4EF5-B756-66BB46266856}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga de Datos Desde Archiv Plano"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino de ADO NET"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Mayores2007"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW20121]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW20121]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[AverageRate]"
+                      cachedDataType="r4"
+                      cachedName="AverageRate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AverageRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[AverageRate]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[CurrencyID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CurrencyID"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyID]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyID]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[CurrencyDate]"
+                      cachedDataType="dbDate"
+                      cachedName="CurrencyDate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyDate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[EndOfDayRate]"
+                      cachedDataType="r4"
+                      cachedName="EndOfDayRate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[EndOfDayRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[EndOfDayRate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[AverageRate]"
+                      dataType="r4"
+                      name="AverageRate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyID]"
+                      dataType="wstr"
+                      length="50"
+                      name="CurrencyID" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyDate]"
+                      dataType="dbTimeStamp"
+                      name="CurrencyDate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[EndOfDayRate]"
+                      dataType="r4"
+                      name="EndOfDayRate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino de ADO NET 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Menores2007"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW20121]"
+                  connectionManagerRefId="Package.ConnectionManagers[(localdb)\Servidor.AdventureWorksDW20121]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].Columns[AverageRate]"
+                      cachedDataType="r4"
+                      cachedName="AverageRate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[AverageRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[AverageRate]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].Columns[CurrencyID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CurrencyID"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyID]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyID]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].Columns[CurrencyDate]"
+                      cachedDataType="dbDate"
+                      cachedName="CurrencyDate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyDate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]" />
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].Columns[EndOfDayRate]"
+                      cachedDataType="r4"
+                      cachedName="EndOfDayRate"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[EndOfDayRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[EndOfDayRate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[AverageRate]"
+                      dataType="r4"
+                      name="AverageRate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyID]"
+                      dataType="wstr"
+                      length="50"
+                      name="CurrencyID" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[CurrencyDate]"
+                      dataType="dbTimeStamp"
+                      name="CurrencyDate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[EndOfDayRate]"
+                      dataType="r4"
+                      name="EndOfDayRate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga de Datos Desde Archiv Plano\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional].Columns[CurrencyDate]"
+                      cachedDataType="dbDate"
+                      cachedName="CurrencyDate"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[MayoresDel2007]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MayoresDel2007"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">#{Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]} &gt;= (DT_DBDATE)"01-01-2007"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">CurrencyDate &gt;= (DT_DBDATE)"01-01-2007"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[MenoresDel2007]"
+                  description="Salida 2 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MenoresDel2007"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">#{Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]} &lt; (DT_DBDATE)"01-01-2007"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">CurrencyDate &lt; (DT_DBDATE)"01-01-2007"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="1033"
+              name="Origen de archivo plano"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Sample Flat File Source Data]"
+                  connectionManagerRefId="Package.ConnectionManagers[Sample Flat File Source Data]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[AverageRate]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[AverageRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[AverageRate]"
+                      name="AverageRate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[CurrencyID]"
+                      length="50"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyID]"
+                      name="CurrencyID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[CurrencyDate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[CurrencyDate]"
+                      name="CurrencyDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[EndOfDayRate]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[EndOfDayRate]"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[EndOfDayRate]"
+                      name="EndOfDayRate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[AverageRate]"
+                      dataType="r4"
+                      name="AverageRate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[CurrencyID]"
+                      dataType="wstr"
+                      length="50"
+                      name="CurrencyID" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[CurrencyDate]"
+                      dataType="dbDate"
+                      name="CurrencyDate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[EndOfDayRate]"
+                      dataType="r4"
+                      name="EndOfDayRate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Carga de Datos Desde Archiv Plano.Paths[MayoresDel2007]"
+              endId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+              name="MayoresDel2007"
+              startId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[MayoresDel2007]" />
+            <path
+              refId="Package\Carga de Datos Desde Archiv Plano.Paths[MenoresDel2007]"
+              endId="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1.Inputs[Entrada de destino de ADO NET]"
+              name="MenoresDel2007"
+              startId="Package\Carga de Datos Desde Archiv Plano\División condicional.Outputs[MenoresDel2007]" />
+            <path
+              refId="Package\Carga de Datos Desde Archiv Plano.Paths[Salida de origen de archivo plano]"
+              endId="Package\Carga de Datos Desde Archiv Plano\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano.Outputs[Salida de origen de archivo plano]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Enviar correo"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Tarea Enviar correo"
+      DTS:DTSID="{0DD24E32-FDB5-4BC6-A46B-144736E61629}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Enviar correo"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea FTP"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:Description="Tarea FTP"
+      DTS:DTSID="{41F2E2C3-F09C-4C97-AF53-406CB5218D0C}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea FTP"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData />
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{E0C4F57E-D5FA-4925-8D8B-9AB19CF2009A}"
+      DTS:From="Package\Carga de Datos Desde Archiv Plano"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Tarea Enviar correo"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FD4EE48B-C0BB-4FE9-ADBE-A2CCB21DBA5E}"
+      DTS:From="Package\Carga de Datos Desde Archiv Plano"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\Tarea FTP" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="245,42"
+          Id="Package\Carga de Datos Desde Archiv Plano"
+          TopLeft="137.5,93.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Tarea Enviar correo"
+          TopLeft="566,172" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="260,135.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="391.5,36.5"
+              Start="0,0"
+              End="391.5,29">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.25"
+                    Point2="0,18.25"
+                    Point3="4,18.25" />
+                  <mssgle:LineSegment
+                    End="387.5,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="387.5,18.25"
+                    Point2="391.5,18.25"
+                    Point3="391.5,22.25" />
+                  <mssgle:LineSegment
+                    End="391.5,29" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="184.22130859375,23.25,23.0573828125,9.421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Tarea FTP"
+          TopLeft="181,251" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="220.5,135.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24,115.5"
+              Start="0,0"
+              End="24,108">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.6496350364963" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42.6496350364963"
+                    Point2="0,46.6496350364963"
+                    Point3="4,46.6496350364963" />
+                  <mssgle:LineSegment
+                    End="20,46.6496350364963" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20,46.6496350364963"
+                    Point2="24,46.6496350364963"
+                    Point3="24,50.6496350364963" />
+                  <mssgle:LineSegment
+                    End="24,108" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Carga de Datos Desde Archiv Plano">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano"
+          TopLeft="78,24" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET"
+          TopLeft="722,223" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1"
+          TopLeft="658,70" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Carga de Datos Desde Archiv Plano\División condicional"
+          TopLeft="367,168" />
+        <EdgeLayout
+          Id="Package\Carga de Datos Desde Archiv Plano.Paths[MayoresDel2007]"
+          TopLeft="538,189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="184,55"
+              Start="0,0"
+              End="176.5,55">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88,0"
+                    Point2="92,0"
+                    Point3="92,4" />
+                  <mssgle:LineSegment
+                    End="92,51" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92,51"
+                    Point2="92,55"
+                    Point3="96,55" />
+                  <mssgle:LineSegment
+                    End="176.5,55" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="55.11982421875,-17.609375,73.7603515625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga de Datos Desde Archiv Plano.Paths[MenoresDel2007]"
+          TopLeft="452.5,168">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="298.5,-56"
+              Start="0,0"
+              End="298.5,-48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-24"
+                    Point2="0,-28"
+                    Point3="4,-28" />
+                  <mssgle:LineSegment
+                    End="294.5,-28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="294.5,-28"
+                    Point2="298.5,-28"
+                    Point3="298.5,-32" />
+                  <mssgle:LineSegment
+                    End="298.5,-48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="112.06482421875,-23,74.3703515625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga de Datos Desde Archiv Plano.Paths[Salida de origen de archivo plano]"
+          TopLeft="173.5,66">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="251.833333333333,102"
+              Start="0,0"
+              End="251.833333333333,94.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.6326767091541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,56.6326767091541"
+                    Point2="0,60.6326767091541"
+                    Point3="4,60.6326767091541" />
+                  <mssgle:LineSegment
+                    End="247.833333333333,60.6326767091541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="247.833333333333,60.6326767091541"
+                    Point2="251.833333333333,60.6326767091541"
+                    Point3="251.833333333333,64.6326767091541" />
+                  <mssgle:LineSegment
+                    End="251.833333333333,94.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
