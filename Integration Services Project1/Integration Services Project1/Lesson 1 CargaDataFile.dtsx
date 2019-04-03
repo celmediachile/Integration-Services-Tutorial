@@ -11,8 +11,8 @@
   DTS:LocaleID="13322"
   DTS:ObjectName="Lesson 1 CargaDataFile"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{C4DAE4AA-7C83-4D6B-8158-31FCCE8F68CD}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{2216C8AF-D659-4D0F-A942-26D80336B8CC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -677,7 +677,7 @@
         <NodeLayout
           Size="245,42"
           Id="Package\Carga de Datos Desde Archiv Plano"
-          TopLeft="195.5,66.5" />
+          TopLeft="319.5,170.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
