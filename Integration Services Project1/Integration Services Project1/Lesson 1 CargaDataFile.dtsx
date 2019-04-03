@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="FIDELI-040"
   DTS:CreatorName="CELMEDIA\dcotal"
-  DTS:DTSID="{4B53F420-C557-4F45-B765-2609E2A40BFD}"
+  DTS:DTSID="{4888D357-AF08-4481-A95A-6018FDBEE290}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="15.0.0900.40"
   DTS:LocaleID="13322"
-  DTS:ObjectName="Lesson 1"
+  DTS:ObjectName="Lesson 1 CargaDataFile"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{3500F789-A6FF-4F30-8FC0-EA354436A603}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{C4DAE4AA-7C83-4D6B-8158-31FCCE8F68CD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -90,7 +90,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6436C3ED-383E-499E-BD86-E523337FA93A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConteoFila">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Carga de Datos Desde Archiv Plano"
@@ -651,50 +661,7 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Tarea Enviar correo"
-      DTS:CreationName="Microsoft.SendMailTask"
-      DTS:Description="Tarea Enviar correo"
-      DTS:DTSID="{0DD24E32-FDB5-4BC6-A46B-144736E61629}"
-      DTS:ExecutableType="Microsoft.SendMailTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Tarea Enviar correo"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData />
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Tarea FTP"
-      DTS:CreationName="Microsoft.FtpTask"
-      DTS:Description="Tarea FTP"
-      DTS:DTSID="{41F2E2C3-F09C-4C97-AF53-406CB5218D0C}"
-      DTS:ExecutableType="Microsoft.FtpTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Tarea FTP"
-      DTS:ThreadHint="1">
-      <DTS:Variables />
-      <DTS:ObjectData />
-    </DTS:Executable>
   </DTS:Executables>
-  <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Restricción]"
-      DTS:CreationName=""
-      DTS:DTSID="{E0C4F57E-D5FA-4925-8D8B-9AB19CF2009A}"
-      DTS:From="Package\Carga de Datos Desde Archiv Plano"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Restricción"
-      DTS:To="Package\Tarea Enviar correo"
-      DTS:Value="1" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
-      DTS:CreationName=""
-      DTS:DTSID="{FD4EE48B-C0BB-4FE9-ADBE-A2CCB21DBA5E}"
-      DTS:From="Package\Carga de Datos Desde Archiv Plano"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Restricción 1"
-      DTS:To="Package\Tarea FTP" />
-  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
 <!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
@@ -706,89 +673,11 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="245,42"
           Id="Package\Carga de Datos Desde Archiv Plano"
-          TopLeft="137.5,93.5" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Tarea Enviar correo"
-          TopLeft="566,172" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="260,135.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="391.5,36.5"
-              Start="0,0"
-              End="391.5,29">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.25"
-                    Point2="0,18.25"
-                    Point3="4,18.25" />
-                  <mssgle:LineSegment
-                    End="387.5,18.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="387.5,18.25"
-                    Point2="391.5,18.25"
-                    Point3="391.5,22.25" />
-                  <mssgle:LineSegment
-                    End="391.5,29" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="184.22130859375,23.25,23.0573828125,9.421875"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="127,42"
-          Id="Package\Tarea FTP"
-          TopLeft="181,251" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="220.5,135.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="24,115.5"
-              Start="0,0"
-              End="24,108">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,42.6496350364963" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,42.6496350364963"
-                    Point2="0,46.6496350364963"
-                    Point3="4,46.6496350364963" />
-                  <mssgle:LineSegment
-                    End="20,46.6496350364963" />
-                  <mssgle:CubicBezierSegment
-                    Point1="20,46.6496350364963"
-                    Point2="24,46.6496350364963"
-                    Point3="24,50.6496350364963" />
-                  <mssgle:LineSegment
-                    End="24,108" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="195.5,66.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -797,6 +686,10 @@
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Carga de Datos Desde Archiv Plano\División condicional"
+          TopLeft="367,168" />
         <NodeLayout
           Size="191,42"
           Id="Package\Carga de Datos Desde Archiv Plano\Origen de archivo plano"
@@ -809,44 +702,38 @@
           Size="186,42"
           Id="Package\Carga de Datos Desde Archiv Plano\Destino de ADO NET 1"
           TopLeft="658,70" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Carga de Datos Desde Archiv Plano\División condicional"
-          TopLeft="367,168" />
         <EdgeLayout
-          Id="Package\Carga de Datos Desde Archiv Plano.Paths[MayoresDel2007]"
-          TopLeft="538,189">
+          Id="Package\Carga de Datos Desde Archiv Plano.Paths[Salida de origen de archivo plano]"
+          TopLeft="173.5,66">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="184,55"
+              EndConnector="251.833333333333,102"
               Start="0,0"
-              End="176.5,55">
+              End="251.833333333333,94.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="88,0" />
+                    End="0,56.6326767091541" />
                   <mssgle:CubicBezierSegment
-                    Point1="88,0"
-                    Point2="92,0"
-                    Point3="92,4" />
+                    Point1="0,56.6326767091541"
+                    Point2="0,60.6326767091541"
+                    Point3="4,60.6326767091541" />
                   <mssgle:LineSegment
-                    End="92,51" />
+                    End="247.833333333333,60.6326767091541" />
                   <mssgle:CubicBezierSegment
-                    Point1="92,51"
-                    Point2="92,55"
-                    Point3="96,55" />
+                    Point1="247.833333333333,60.6326767091541"
+                    Point2="251.833333333333,60.6326767091541"
+                    Point3="251.833333333333,64.6326767091541" />
                   <mssgle:LineSegment
-                    End="176.5,55" />
+                    End="251.833333333333,94.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="55.11982421875,-17.609375,73.7603515625,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -886,37 +773,39 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Carga de Datos Desde Archiv Plano.Paths[Salida de origen de archivo plano]"
-          TopLeft="173.5,66">
+          Id="Package\Carga de Datos Desde Archiv Plano.Paths[MayoresDel2007]"
+          TopLeft="538,189">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="251.833333333333,102"
+              EndConnector="184,55"
               Start="0,0"
-              End="251.833333333333,94.5">
+              End="176.5,55">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56.6326767091541" />
+                    End="88,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,56.6326767091541"
-                    Point2="0,60.6326767091541"
-                    Point3="4,60.6326767091541" />
+                    Point1="88,0"
+                    Point2="92,0"
+                    Point3="92,4" />
                   <mssgle:LineSegment
-                    End="247.833333333333,60.6326767091541" />
+                    End="92,51" />
                   <mssgle:CubicBezierSegment
-                    Point1="247.833333333333,60.6326767091541"
-                    Point2="251.833333333333,60.6326767091541"
-                    Point3="251.833333333333,64.6326767091541" />
+                    Point1="92,51"
+                    Point2="92,55"
+                    Point3="96,55" />
                   <mssgle:LineSegment
-                    End="251.833333333333,94.5" />
+                    End="176.5,55" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="55.11982421875,-17.609375,73.7603515625,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
